@@ -1,7 +1,7 @@
-import events.CreeperExplodes
+import events.CreeperIgnite
 import events.EntityGrief
 import events.OnFire
-import events.OnTnt
+import events.OnExplosion
 import org.bukkit.plugin.java.JavaPlugin
 
 class AntiStructureGriefing : JavaPlugin(){
@@ -10,14 +10,12 @@ class AntiStructureGriefing : JavaPlugin(){
         saveDefaultConfig()
         val entityNames: List<String> = config.getStringList("entities")
         if (entityNames.contains("CREEPER")) {
-            server.pluginManager.registerEvents(CreeperExplodes(this), this)
+            server.pluginManager.registerEvents(CreeperIgnite(this), this)
         }
         if (entityNames.contains("FIRE")) {
             server.pluginManager.registerEvents(OnFire(this), this)
         }
-        if (entityNames.contains("TNT")) {
-            server.pluginManager.registerEvents(OnTnt(this), this)
-        }
+        server.pluginManager.registerEvents(OnExplosion(this), this)
         server.pluginManager.registerEvents(EntityGrief(this), this)
     }
 }

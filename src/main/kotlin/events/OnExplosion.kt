@@ -2,22 +2,20 @@ package events
 
 import org.bukkit.Location
 import org.bukkit.StructureType
-import org.bukkit.block.Block
 import org.bukkit.entity.Entity
-import org.bukkit.entity.TNTPrimed
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.entity.ExplosionPrimeEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.jetbrains.annotations.Nullable
 
-class OnTnt(private val plugin: JavaPlugin) : Listener {
+class OnExplosion(private val plugin: JavaPlugin) : Listener {
 
     @EventHandler
-    fun entityGrief(event: ExplosionPrimeEvent) {
+    fun onExplosion(event: ExplosionPrimeEvent) {
         val entity: Entity = event.entity
-        if (entity !is TNTPrimed) {
+        val entityNames: List<String> = plugin.config.getStringList("entities")
+        if (!entityNames.contains(entity.type.name)) {
             return
         }
         plugin.config.getConfigurationSection("structures")?.getValues(false)?.forEach { (structureName, radius) ->
@@ -27,8 +25,8 @@ class OnTnt(private val plugin: JavaPlugin) : Listener {
                 if (structureLoc != null) {
                     structureLoc.y = entity.location.y
                     if (entity.location.distance(structureLoc) < radius as Double) {
-                        plugin.logger.info("Protect $structureName from TNT.")
-                        event.isCancelled = true
+                        plugin.logger.info("Protect $structureName from ${entity.type.name} explosion.")
+                        event.radius = 0.0F
                     }
                 }
             }

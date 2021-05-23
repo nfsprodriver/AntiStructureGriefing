@@ -25,7 +25,7 @@ class EntityGrief(private val plugin: JavaPlugin) : Listener {
                 if (structureLoc != null) {
                     structureLoc.y = entity.location.y
                     if (entity.location.distance(structureLoc) < radius as Double) {
-                        plugin.logger.info("Protect $structureName from griefing.")
+                        plugin.logger.info("Protect $structureName from ${entity.type.name} griefing.")
                         event.isCancelled = true
                     }
                 }

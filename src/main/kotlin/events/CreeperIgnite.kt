@@ -9,10 +9,10 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.jetbrains.annotations.Nullable
 
-class CreeperExplodes(private val plugin: JavaPlugin) : Listener {
+class CreeperIgnite(private val plugin: JavaPlugin) : Listener {
 
     @EventHandler
-    fun creeperExplodes(event: CreeperIgniteEvent) {
+    fun creeperIgnite(event: CreeperIgniteEvent) {
         val creeper: Creeper = event.entity
         plugin.config.getConfigurationSection("structures")?.getValues(false)?.forEach { (structureName, radius) ->
             val structure: StructureType? = StructureType.getStructureTypes()[structureName]
