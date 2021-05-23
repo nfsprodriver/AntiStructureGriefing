@@ -1,0 +1,5 @@
+entities: ["FIRE", "TNT", "CREEPER", "ENDERMAN"]
+# [nether_fossil, jungle_pyramid, monument, desert_pyramid, mineshaft, ocean_ruin, bastion_remnant, shipwreck, fortress, buried_treasure, pillager_outpost, swamp_hut, igloo, village, endcity, stronghold, mansion, ruined_portal]
+# radius
+structures:
+  mansion: 150.0
