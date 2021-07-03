@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.ExplosionPrimeEvent
 import org.bukkit.plugin.java.JavaPlugin
-import org.jetbrains.annotations.Nullable
 
 class OnExplosion(private val plugin: JavaPlugin) : Listener {
 
@@ -21,7 +20,7 @@ class OnExplosion(private val plugin: JavaPlugin) : Listener {
         plugin.config.getConfigurationSection("structures")?.getValues(false)?.forEach { (structureName, radius) ->
             val structure: StructureType? = StructureType.getStructureTypes()[structureName]
             if (structure != null) {
-                val structureLoc: @Nullable Location? = entity.world.locateNearestStructure(entity.location, structure, 3, false)
+                val structureLoc: Location? = entity.world.locateNearestStructure(entity.location, structure, 3, false)
                 if (structureLoc != null) {
                     structureLoc.y = entity.location.y
                     if (entity.location.distance(structureLoc) < radius as Double) {

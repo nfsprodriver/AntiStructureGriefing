@@ -21,7 +21,7 @@ class EntityGrief(private val plugin: JavaPlugin) : Listener {
         plugin.config.getConfigurationSection("structures")?.getValues(false)?.forEach { (structureName, radius) ->
             val structure: StructureType? = StructureType.getStructureTypes()[structureName]
             if (structure != null) {
-                val structureLoc: @Nullable Location? = entity.world.locateNearestStructure(entity.location, structure, 3, false)
+                val structureLoc: Location? = entity.world.locateNearestStructure(entity.location, structure, 3, false)
                 if (structureLoc != null) {
                     structureLoc.y = entity.location.y
                     if (entity.location.distance(structureLoc) < radius as Double) {

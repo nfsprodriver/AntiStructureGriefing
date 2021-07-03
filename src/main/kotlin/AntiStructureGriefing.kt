@@ -1,4 +1,3 @@
-import events.CreeperIgnite
 import events.EntityGrief
 import events.OnFire
 import events.OnExplosion
@@ -9,9 +8,6 @@ class AntiStructureGriefing : JavaPlugin(){
     override fun onEnable() {
         saveDefaultConfig()
         val entityNames: List<String> = config.getStringList("entities")
-        if (entityNames.contains("CREEPER")) {
-            server.pluginManager.registerEvents(CreeperIgnite(this), this)
-        }
         if (entityNames.contains("FIRE")) {
             server.pluginManager.registerEvents(OnFire(this), this)
         }
